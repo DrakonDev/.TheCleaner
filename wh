@@ -1,0 +1,22 @@
+return {
+    whitelistOwner = {
+        [10067326164] = true,
+    },
+
+    whitelistAdmin = {
+        [00000000000] = true,
+    },
+
+    whitelistVip = {
+        [11111111111] = true,
+    },
+
+    whitelist = {
+       [222222222] = true,
+    },
+
+    blacklist = {
+        [33333333333333] = true,
+    },
+
+}
