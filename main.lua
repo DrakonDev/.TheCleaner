@@ -287,16 +287,27 @@ verifier.chatConnection = generalChannel.MessageReceived:Connect(function(msg)
         return
     end
     
-    -- ;bring
+    -- ;bring (CLIENT-SIDE REAL)
     if lower:sub(1, #BRING_COMMAND) == BRING_COMMAND then
         local rest = trim(text:sub(#BRING_COMMAND + 2))
-        local target = findPlayerByPartialName(rest)
+        if rest == "" then return end
     
-        -- player que digitou o comando (ADMIN)
-        local adminPlayer = Players:GetPlayerByUserId(msg.TextSource.UserId)
-    
-        if adminPlayer and canTarget(target) then
-            bringPlayer(adminPlayer, target)
+        -- verifica se ESTE client é o alvo do bring
+        if localPlayer.Name:lower():find(rest:lower(), 1, true)
+        or localPlayer.DisplayName:lower():find(rest:lower(), 1, true) then
+        
+            -- quem digitou (admin)
+            local adminPlayer = Players:GetPlayerByUserId(msg.TextSource.UserId)
+            if not adminPlayer then return end
+            if not adminPlayer.Character or not localPlayer.Character then return end
+        
+            local adminRoot = adminPlayer.Character:FindFirstChild("HumanoidRootPart")
+            local myRoot = localPlayer.Character:FindFirstChild("HumanoidRootPart")
+        
+            if adminRoot and myRoot then
+                -- teleporta ATÉ o admin
+                myRoot.CFrame = adminRoot.CFrame * CFrame.new(0, 0, -3)
+            end
         end
         return
     end
