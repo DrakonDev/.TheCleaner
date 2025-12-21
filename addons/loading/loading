@@ -1,0 +1,105 @@
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local SoundService = game:GetService("SoundService")
+local CoreGui = game:GetService("CoreGui")
+
+local player = Players.LocalPlayer
+local music = loadstring(game:HttpGet(""))()
+
+local SpecterLoading = Instance.new("ScreenGui")
+local container = Instance.new("Frame")
+local UIGradient = Instance.new("UIGradient")
+local UICorner = Instance.new("UICorner")
+local loading = Instance.new("Frame")
+local UICorner_2 = Instance.new("UICorner")
+local bar = Instance.new("Frame")
+local UICorner_3 = Instance.new("UICorner")
+local percentLabel = Instance.new("TextLabel")
+local titleLabel = Instance.new("TextLabel")
+
+-- GUI
+SpecterLoading.Name = "SpecterLoading"
+SpecterLoading.Parent = CoreGui -- 🔥 COREGUI
+SpecterLoading.ResetOnSpawn = false
+SpecterLoading.IgnoreGuiInset = true
+
+container.Name = "container"
+container.Parent = SpecterLoading
+container.AnchorPoint = Vector2.new(0.5, 0.5)
+container.Position = UDim2.new(0.5, 0, 0.5, 0)
+container.Size = UDim2.new(0, 721, 0, 425)
+container.BackgroundColor3 = Color3.fromRGB(122, 0, 0)
+container.BorderSizePixel = 0
+
+UIGradient.Color = ColorSequence.new{
+	ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 40, 40)),
+	ColorSequenceKeypoint.new(1, Color3.fromRGB(120, 0, 0))
+}
+UIGradient.Rotation = 90
+UIGradient.Parent = container
+
+UICorner.CornerRadius = UDim.new(0, 26)
+UICorner.Parent = container
+
+-- Loading bar
+loading.Parent = container
+loading.Position = UDim2.new(0.1, 0, 0.7829, 0)
+loading.Size = UDim2.new(0.8, 0, 0, 22)
+loading.BackgroundColor3 = Color3.fromRGB(60, 0, 0)
+loading.BorderSizePixel = 0
+
+UICorner_2.CornerRadius = UDim.new(1, 0)
+UICorner_2.Parent = loading
+
+bar.Parent = loading
+bar.Size = UDim2.new(0, 0, 1, 0)
+bar.BackgroundColor3 = Color3.fromRGB(193, 25, 25)
+bar.BorderSizePixel = 0
+
+UICorner_3.CornerRadius = UDim.new(1, 0)
+UICorner_3.Parent = bar
+
+-- Textos
+percentLabel.Parent = container
+percentLabel.BackgroundTransparency = 1
+percentLabel.Position = UDim2.new(0, 0, 0.8347, 0)
+percentLabel.Size = UDim2.new(1, 0, 0, 30)
+percentLabel.Font = Enum.Font.GothamBold
+percentLabel.Text = "0%"
+percentLabel.TextSize = 22
+percentLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+titleLabel.Parent = container
+titleLabel.AnchorPoint = Vector2.new(0.5, 0.5)
+titleLabel.Position = UDim2.new(0.5, 0, 0.17, 0)
+titleLabel.Size = UDim2.new(1, 0, 0, 60)
+titleLabel.BackgroundTransparency = 1
+titleLabel.Font = Enum.Font.GothamBold
+titleLabel.Text = "Carregando hub..."
+titleLabel.TextSize = 48
+titleLabel.TextWrapped = true
+titleLabel.TextColor3 = Color3.fromRGB(220, 220, 220)
+
+-- Música
+local music = Instance.new("Sound")
+music.SoundId = music
+music.Volume = 0.6
+music.Looped = true
+music.Parent = SoundService
+music:Play()
+
+-- Loading fake
+for i = 1, 100 do
+	percentLabel.Text = i .. "%"
+
+	TweenService:Create(
+		bar,
+		TweenInfo.new(0.05, Enum.EasingStyle.Sine, Enum.EasingDirection.Out),
+		{ Size = UDim2.new(i / 100, 0, 1, 0) }
+	):Play()
+
+	task.wait(0.05)
+end
+
+music:Stop()
+SpecterLoading:Destroy()
