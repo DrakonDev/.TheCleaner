@@ -5,7 +5,7 @@ local CoreGui = game:GetService("CoreGui")
 
 local player = Players.LocalPlayer
 
-local music = "rbxassetid://1840271919"
+local music = loadstring(game:HttpGet("https://raw.githubusercontent.com/DrakonDev/.TheCleaner/refs/heads/main/addons/loading/music"))()
 
 local SpecterLoading = Instance.new("ScreenGui")
 local container = Instance.new("Frame")
@@ -118,4 +118,5 @@ end
 
 music:Stop()
 SpecterLoading:Destroy()
+
 
