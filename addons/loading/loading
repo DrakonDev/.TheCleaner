@@ -17,6 +17,10 @@ local percentLabel = Instance.new("TextLabel")
 local titleLabel = Instance.new("TextLabel")
 local executorLabel = Instance.new("TextLabel")
 
+local musicId = loadstring(game:HttpGet(
+	"https://raw.githubusercontent.com/DrakonDev/.TheCleaner/refs/heads/main/addons/loading/music"
+))()
+
 local executorName = "Unknown Executor"
 
 if identifyexecutor then
@@ -96,11 +100,12 @@ executorLabel.TextSize = 23
 executorLabel.TextColor3 = Color3.fromRGB(220, 220, 220)
 
 local music = Instance.new("Sound")
-music.SoundId = "rbxassetid://1840271919"
+music.SoundId = musicId -- aqui agora é string
 music.Volume = 0.6
 music.Looped = true
 music.Parent = SoundService
 music:Play()
+
 for i = 1, 100 do
 	percentLabel.Text = i .. "%"
 
