@@ -5,6 +5,8 @@ local CoreGui = game:GetService("CoreGui")
 
 local player = Players.LocalPlayer
 
+local music = "rbxassetid://1840271919"
+
 local SpecterLoading = Instance.new("ScreenGui")
 local container = Instance.new("Frame")
 local UIGradient = Instance.new("UIGradient")
@@ -96,7 +98,7 @@ executorLabel.TextSize = 23
 executorLabel.TextColor3 = Color3.fromRGB(220, 220, 220)
 
 local music = Instance.new("Sound")
-music.SoundId = "rbxassetid://1840271919"
+music.SoundId = music
 music.Volume = 0.6
 music.Looped = true
 music.Parent = SoundService
@@ -116,3 +118,4 @@ end
 
 music:Stop()
 SpecterLoading:Destroy()
+
