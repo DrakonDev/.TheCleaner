@@ -5,7 +5,9 @@ local CoreGui = game:GetService("CoreGui")
 
 local player = Players.LocalPlayer
 
-local music = loadstring(game:HttpGet("https://raw.githubusercontent.com/DrakonDev/.TheCleaner/refs/heads/main/addons/loading/music"))()
+local musicId = loadstring(game:HttpGet(
+	"https://raw.githubusercontent.com/DrakonDev/.TheCleaner/refs/heads/main/addons/loading/music"
+))()
 
 local SpecterLoading = Instance.new("ScreenGui")
 local container = Instance.new("Frame")
@@ -98,12 +100,11 @@ executorLabel.TextSize = 23
 executorLabel.TextColor3 = Color3.fromRGB(220, 220, 220)
 
 local music = Instance.new("Sound")
-music.SoundId = music
+music.SoundId = musicId
 music.Volume = 0.6
 music.Looped = true
 music.Parent = SoundService
 music:Play()
-
 for i = 1, 100 do
 	percentLabel.Text = i .. "%"
 
@@ -118,5 +119,6 @@ end
 
 music:Stop()
 SpecterLoading:Destroy()
+
 
 
