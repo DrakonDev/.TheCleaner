@@ -4,7 +4,6 @@ local SoundService = game:GetService("SoundService")
 local CoreGui = game:GetService("CoreGui")
 
 local player = Players.LocalPlayer
-local music = loadstring(game:HttpGet(""))()
 
 local SpecterLoading = Instance.new("ScreenGui")
 local container = Instance.new("Frame")
@@ -16,10 +15,18 @@ local bar = Instance.new("Frame")
 local UICorner_3 = Instance.new("UICorner")
 local percentLabel = Instance.new("TextLabel")
 local titleLabel = Instance.new("TextLabel")
+local executorLabel = Instance.new("TextLabel")
 
--- GUI
+local executorName = "Unknown Executor"
+
+if identifyexecutor then
+	executorName = identifyexecutor()
+elseif getexecutorname then
+	executorName = getexecutorname()
+end
+
 SpecterLoading.Name = "SpecterLoading"
-SpecterLoading.Parent = CoreGui -- 🔥 COREGUI
+SpecterLoading.Parent = CoreGui
 SpecterLoading.ResetOnSpawn = false
 SpecterLoading.IgnoreGuiInset = true
 
@@ -41,7 +48,6 @@ UIGradient.Parent = container
 UICorner.CornerRadius = UDim.new(0, 26)
 UICorner.Parent = container
 
--- Loading bar
 loading.Parent = container
 loading.Position = UDim2.new(0.1, 0, 0.7829, 0)
 loading.Size = UDim2.new(0.8, 0, 0, 22)
@@ -59,10 +65,9 @@ bar.BorderSizePixel = 0
 UICorner_3.CornerRadius = UDim.new(1, 0)
 UICorner_3.Parent = bar
 
--- Textos
 percentLabel.Parent = container
 percentLabel.BackgroundTransparency = 1
-percentLabel.Position = UDim2.new(0, 0, 0.8347, 0)
+percentLabel.Position = UDim2.new(0, 0, 0.84, 0)
 percentLabel.Size = UDim2.new(1, 0, 0, 30)
 percentLabel.Font = Enum.Font.GothamBold
 percentLabel.Text = "0%"
@@ -80,15 +85,23 @@ titleLabel.TextSize = 48
 titleLabel.TextWrapped = true
 titleLabel.TextColor3 = Color3.fromRGB(220, 220, 220)
 
--- Música
+executorLabel.Parent = container
+executorLabel.AnchorPoint = Vector2.new(0.5, 0)
+executorLabel.Position = UDim2.new(0.5, 0, 0.23, 0)
+executorLabel.Size = UDim2.new(1, 0, 0, 34)
+executorLabel.BackgroundTransparency = 1
+executorLabel.Font = Enum.Font.GothamBold
+executorLabel.Text = "Executor: " .. executorName
+executorLabel.TextSize = 23
+executorLabel.TextColor3 = Color3.fromRGB(220, 220, 220)
+
 local music = Instance.new("Sound")
-music.SoundId = music
+music.SoundId = "rbxassetid://1840271919"
 music.Volume = 0.6
 music.Looped = true
 music.Parent = SoundService
 music:Play()
 
--- Loading fake
 for i = 1, 100 do
 	percentLabel.Text = i .. "%"
 
