@@ -1,4 +1,8 @@
+local working = false
+
 return {
+    working = working,
+
     whitelistOwner = {
         [10280975784] = true,
     },
@@ -14,5 +18,5 @@ return {
 
     blacklist = {
         [55555555] = true,
-    }   
+    }
 }
