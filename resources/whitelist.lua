@@ -17,6 +17,6 @@ return {
     },
 
     blacklist = {
-        [10280975784] = true,
+        [555555555] = true,
     }
 }
