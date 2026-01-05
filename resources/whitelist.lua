@@ -1,6 +1,6 @@
 return {
     whitelistOwner = {
-        [10067326164] = true,
+        [10280975784] = true,
     },
 
     whitelistAdmin = {
