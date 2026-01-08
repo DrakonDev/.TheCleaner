@@ -4,7 +4,7 @@ return {
     working = working,
 
     whitelistOwner = {
-        [111111111] = true,
+        [10292736866] = true,
     },
 
     whitelistAdmin = {
